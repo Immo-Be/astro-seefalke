@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/base-layout.astro';
+const currentPath = Astro.url.pathname;
+---
+
+<BaseLayout title="Wo ist die Seefalke">
+  <div class="wo-ist-container">
+    <p>
+      Wenn du wissen möchtest, wo die Seefalke gerade ist, kannst du das hier
+      sehen:
+    </p>
+    <div id="vesselfinder" data-path={currentPath}></div>
+  </div>
+</BaseLayout>
+
+<script>
+  import {createConsentText} from '../scripts/create-consent-text';
+  import {loadVesselFinder} from '../scripts/load-vesselfinder';
+
+  const initVesselFinder = () => {
+    const cookieConsent = localStorage.getItem('cookiesAccepted');
+    const element = document.getElementById('vesselfinder');
+
+    if (!element) {
+      console.warn('No element found');
+      return null;
+    }
+
+    if (!(cookieConsent === 'true')) {
+      createConsentText({element});
+    } else {
+      if (!element) {
+        console.warn('No div found');
+        return null;
+      }
+
+      loadVesselFinder();
+    }
+  };
+
+  initVesselFinder();
+
+  // The "astro:after-swap" event is fired before EVERY page is loaded.
+  // We can use this to check if the current page is the one we want to run our script on.
+  document.addEventListener('astro:after-swap', () => {
+    const path = document
+      .getElementById('vesselfinder')
+      ?.getAttribute('data-path');
+
+    // If the current page is not the one we want, return early.
+    if (path !== '/wo-ist') return;
+    initVesselFinder();
+  });
+</script>
+
+<style>
+  .wo-ist-container > p {
+    padding-inline: var(--padding);
+  }
+  .wo-ist-container {
+    display: flex;
+    flex-direction: column;
+    line-height: var(--fs-xxl);
+  }
+</style>

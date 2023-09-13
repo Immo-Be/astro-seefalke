@@ -1,81 +1,271 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import InfoCards from '../components/info-cards.astro';
+import BlogPreivew from '../components/blog-preview.astro';
+import BaseLayout from '../layouts/base-layout.astro';
+import CustomShapeBottom from '../components/custom-shape-bottom.astro';
+import CustomShapeTop from '../components/custom-shape-top.astro';
+
+import {Image} from 'astro:assets';
+
+import localSeefalke from '../images/seefalke-neu.webp';
+
+import SVGIcon from '/src/icons/arrow-down.svg';
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Themes"
-				body="Explore a galaxy of community-built starter themes."
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Community"
-				body="Come say hi to our amazing Discord community. ❤️"
-			/>
-		</ul>
-	</main>
-</Layout>
+<BaseLayout title="Welcome to Astro.">
+  <main>
+    <section class="header-scroll">
+      <div class="intro flow fast-scroll">
+        <Image
+          src={localSeefalke}
+          alt=""
+          class="index-image"
+          width={700}
+          height={500}
+          loading={'eager'}
+        />
+
+        <div class="text-wrapper">
+          <h1>
+            MOIN & willkommen an Bord der <span class="text-gradient"
+              >Seefalke</span
+            >!
+          </h1>
+          <div class="intro-text flow">
+            <p>
+              Unser historisches Schiff "Seefalke" liegt <strong
+                >Museumshafen in Harburg</strong
+              >. Wir sind aus Niendorf hierher gezogen und fühlen uns richtig
+              wohl
+            </p>
+            <p>
+              Als ehemalige Lotsenversetzerin ist die Seefalke mittlwerweile in
+              den wohlverdienten Ruhestand gegangen... Das bedeutet jedoch
+              nicht, dass sie nicht mehr rauskommt! Weiterhin wird die Seefalke
+              als martime <strong>Filmkulisse für historische Filme</strong>
+               genutzt.
+            </p>
+            <p>
+              Erfahre jetzt mehr über die Seefalke, ihre Geschichte und auch
+              ihre Crew.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="cta-slide-in">
+        Scrolle weiter nach unten, um mehr über die Seefalke zu erfahren.
+        <div class="arrow-container">
+          <Image
+            src={SVGIcon}
+            alt=""
+            style={{
+              width: '24px',
+              height: '24px',
+              margin: '0 auto',
+              zIndex: '-1',
+              position: 'relative'
+            }}
+          />
+        </div>
+      </div>
+    </section>
+
+    <CustomShapeTop />
+
+    <InfoCards />
+    <CustomShapeBottom />
+    <BlogPreivew />
+  </main>
+  <!-- <CookieConsent /> -->
+</BaseLayout>
+
+<script>
+  new PerformanceObserver((entryList) => {
+    for (const entry of entryList.getEntries()) {
+      console.log('Layout shift:', entry);
+    }
+  }).observe({type: 'layout-shift', buffered: true});
+  window.addEventListener('scroll', () => {
+    const scrollPosition = window.scrollY;
+    const slideInDiv = document.querySelector(
+      '.cta-slide-in'
+    ) as HTMLElement | null;
+
+    // Adjust the translateY value to control scroll speed
+    const translateYValue = -scrollPosition * 0.2;
+
+    // Apply the transform to the fast-scroll element
+    const fastScroll = document.querySelector(
+      '.fast-scroll'
+    ) as HTMLElement | null;
+
+    if (fastScroll) {
+      fastScroll.style.transform = `translateY(${translateYValue}px)`;
+    }
+
+    // Move the slide-in div in from the right when scrolling up
+
+    if (slideInDiv) {
+      slideInDiv.style.transform = `translateY(${translateYValue * 0.8}px)`;
+      // slideInDiv.style.top = `calc(100% - ${scrollPosition}px)`;
+      // Move the scroll-up div upwards when scrolling up
+      // scrollUpDiv.style.transform = `translateY(${scrollPosition}px)`;
+    }
+  });
+</script>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-	}
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-	}
-	.instructions code {
-		font-size: 0.875em;
-		font-weight: bold;
-		background: rgba(var(--accent), 12%);
-		color: rgb(var(--accent));
-		border-radius: 4px;
-		padding: 0.3em 0.45em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
+  main {
+    width: 100%;
+  }
+  h1 {
+    margin-bottom: var(--padding);
+  }
+
+  .arrow-container {
+    z-index: -1;
+  }
+
+  .cta-slide-in {
+    text-align: center;
+    /* white-space: nowrap; */
+    /* border: 1px solid var(--clr-accent); */
+    position: absolute;
+    /* left: calc(50% - 10rem); */
+    /* bottom: 10rem; */
+    margin-inline: var(--padding);
+    padding: calc(var(--padding) / 2);
+
+    z-index: 0;
+    bottom: clamp(-5.2rem, -6rem, -7rem);
+    /* left: -100vw; */
+    /* margin-bottom: var(--padding); */
+    transition: right 0.5s ease-in-out;
+    z-index: -1;
+  }
+
+  @media (--viewport-medium) {
+    .cta-slide-in {
+      display: block;
+    }
+  }
+
+  .fast-scroll {
+    /* background-color: #f0f0f0; */
+    transform: translateY(0);
+  }
+
+  .fade-scroll {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .index-image {
+    margin-inline: var(--padding);
+  }
+  /* .custom-shape-divider {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    background-color: var(--clr-accent);
+  }
+
+  .custom-shape-divider svg {
+    position: relative;
+    display: block;
+    width: calc(182% + 1.3px);
+    height: 56px;
+    transform: rotateY(180deg);
+  }
+
+  .custom-shape-divider .shape-fill {
+    fill: var(--clr-background);
+  }
+
+  .custom-shape-divider-top-1692959622 {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .custom-shape-divider-top-1692959622 svg {
+    position: relative;
+    display: block;
+    width: calc(141% + 1.3px);
+    height: 30px;
+    transform: rotateY(180deg);
+  }
+
+  .custom-shape-divider-top-1692959622 .shape-fill {
+    fill: var(--clr-accent);
+  } */
+
+  .text-wrapper {
+    /* min-width: 300px;  */
+    min-height: 332px;
+    min-width: 420px;
+    text-align: center;
+
+    flex: 2;
+    vertical-align: baseline;
+    line-height: var(--fs-xl);
+    /* text-align: left; */
+  }
+
+  img {
+    flex: 1;
+  }
+
+  .filmset-info {
+    width: 100%;
+    color: var(--clr-accent);
+    background-color: var(--clr-background);
+    padding: 1.4rem;
+    font-size: var(--fs-xl);
+    line-height: var(--fs-xl);
+    border-bottom: 1px solid var(--clr-accent);
+    border-top: 1px solid var(--clr-accent);
+  }
+
+  .image-container {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    transition: transform 0.5s ease; /* Smooth transition effect */
+  }
+
+  section {
+    position: relative;
+    padding: var(--padding);
+    text-wrap: balance;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* overflow: hidden; */
+  }
+  .background-overlay > div {
+    /* margin: auto; */
+    margin-top: 10vh;
+  }
+
+  .text-gradient {
+    background: rgb(33, 156, 103);
+    background: linear-gradient(to right, rgb(33, 156, 103) 0%, #cf1512 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient:hover {
+    text-decoration: underline;
+    z-index: 20;
+    -webkit-text-fill-color: var(--clr-primary-text);
+  }
+
+  .intro {
+    /* min-width: 10rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 </style>

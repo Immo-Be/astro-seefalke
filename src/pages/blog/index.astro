@@ -1,0 +1,36 @@
+---
+import {getCollection} from 'astro:content';
+import FormattedDate from '../../components/formatted-date.astro';
+import BaseLayout from '../../layouts/base-layout.astro';
+import CssSwipeContainer from '../../components/css-swipe-container.astro';
+import GoogleMaps from '../../components/google-maps.astro';
+import BlogPreviewArticles from '../../components/blog-preview-articles.astro';
+
+import type {Post} from '../../types/blog';
+
+// const posts = (await getCollection('blog')).sort(
+//   (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+// );
+
+const res = await fetch('http://seefalke.info/wp-json/wp/v2/posts');
+const posts = (await res.json()) as Array<Post>;
+---
+
+<BaseLayout title="blog">
+  <main>
+    <section>
+      <h3>Blog</h3>
+      {(<BlogPreviewArticles posts={posts} />)}
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  h3 {
+    font-size: var(--fs-xxl);
+    margin-bottom: var(--padding);
+  }
+  section {
+    padding-inline: var(--padding);
+  }
+</style>

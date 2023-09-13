@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/base-layout.astro";
+
+import { Image } from 'astro:assets';
+import localMathias from '../images/mathias.png';
+import CustomShapeBottom from "../components/custom-shape-bottom.astro";
+---
+
+<BaseLayout title="Über uns">
+  <div class="kontakt-container">
+    <p>
+      Moin, meine Name ist <strong>Mathias</strong> und ich bin der Kapitän auf
+      der Seefalke
+    </p>
+
+    <Image src={localMathias} alt="Mathias" class="kontakt-img" />
+  </div>
+  <CustomShapeBottom />
+</BaseLayout>
+
+<style>
+  .kontakt-container {
+    padding-inline: var(--padding);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-accent);
+    color: var(--clr-background);
+    flex-wrap: wrap;
+    text-align: center;
+    line-height: var(--fs-xxl);
+    gap: var(--padding)
+  }
+
+  .kontakt-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 5px;
+  }
+</style>

@@ -1,0 +1,31 @@
+---
+import BlogPost from '../../layouts/blog-post.astro';
+import GoogleMaps from '../../components/google-maps.astro';
+import type { Post } from '../../types/blog';
+// import BlogPost from '../../layouts/BlogPost.astro';
+
+const { slug } = Astro.params;
+
+const res = await fetch(
+  'http://seefalke.info/wp-json/wp/v2/posts?slug=' + slug + '&_embed',
+);
+let [post] = (await res.json()) as Post[];
+
+export async function getStaticPaths() {
+  const res = await fetch('http://seefalke.info/wp-json/wp/v2/posts');
+  const posts = (await res.json()) as Array<Post>;
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+// type Props = CollectionEntry<'blog'>;
+
+// const post = Astro.props;
+// const { Content } = await post.;
+---
+
+<BlogPost {...post}>
+  <h1 set:html={post.title.rendered} />
+  <Fragment set:html={post.content.rendered} />
+</BlogPost>

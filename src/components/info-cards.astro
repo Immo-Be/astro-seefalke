@@ -1,0 +1,104 @@
+---
+import type {ShipWiki} from '../types/seefalke-details';
+
+import seefalkeSpecs from '../constants/seefalke-specs.json';
+import CssSwipeContainer from './css-swipe-container.astro';
+
+const wiki = seefalkeSpecs.wiki;
+---
+
+<CssSwipeContainer class="info-card-container" gridOnDesktop>
+  <section class="info-text fast-scroll">
+    <p>Ein paar Eckdaten*</p>
+    <span
+      >*Quelle: <a
+        target="_blank"
+        href="https://www.marinetraffic.com/en/ais/details/ships/shipid:7731198/mmsi:211796470/imo:0/vessel:SEEFALKE"
+        >AIS</a
+      ></span
+    >
+  </section>
+  {
+    wiki.map((entry) => {
+      const tableName = Object.keys(entry)[0] as keyof typeof entry;
+      const tableData: ShipWiki['wiki'][number][string] = entry[
+        tableName
+      ] as ShipWiki['wiki'][number][string];
+
+      return (
+        <table class="card">
+          <th colspan="2">{tableName.replace(/_/g, ' ')}</th>
+          {Object.keys(tableData).map((key) => {
+            return (
+              <tr>
+                <td>{key.replace(/_/g, ' ')}</td>
+                <td>{tableData[key]}</td>
+              </tr>
+            );
+          })}
+        </table>
+      );
+    })
+  }
+</CssSwipeContainer>
+
+<style>
+  .info-text {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: var(--clr-background);
+  }
+
+  .info-text span {
+    font-size: var(--fs-s);
+    line-height: var(--fs-s);
+    margin-top: 5rem;
+  }
+
+  .info-text a {
+    color: var(--clr-background);
+  }
+
+  .card {
+    padding: var(--padding);
+    height: 280px;
+  }
+
+  .card:hover {
+    transform: scale(0.97);
+  }
+  .info-card-container {
+    width: 100vw;
+    background-color: var(--clr-accent);
+    gap: 2rem;
+  }
+  * {
+    box-sizing: border-box;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .card-container section:first-child {
+    font-size: var(--fs-xl);
+    line-height: var(--fs-xl);
+  }
+
+  .card-container span {
+    font-size: var(--fs-s);
+    line-height: var(--fs-s);
+    margin-top: 5rem;
+  }
+
+  .card-container a {
+    color: var(--clr-background);
+  }
+
+  @media (max-width: 600px) {
+    .info-text {
+      display: none;
+    }
+  }
+</style>

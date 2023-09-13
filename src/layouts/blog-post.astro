@@ -1,0 +1,39 @@
+---
+import BlogPostImage from '../components/blog-post-image.astro';
+import CssSwipeContainer from '../components/css-swipe-container.astro';
+import GoogleMaps from '../components/google-maps.astro';
+import type {Post} from '../types/blog';
+import BaseLayout from './base-layout.astro';
+
+type Props = Post;
+const {acf} = Astro.props;
+---
+
+<BaseLayout title="">
+  ´ <CssSwipeContainer class="dimensions">
+    {(<GoogleMaps tripCoords={acf.coords} />)}
+    <BlogPostImage src={acf.url_title_image} alt="" />
+  </CssSwipeContainer>
+  <article id="blog-article" class="section">
+    <slot />
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .dimensions {
+    height: 400px;
+    width: 100%;
+  }
+  #blog-article {
+    width: clamp(45ch, 50%, 75ch);
+    margin: 2rem auto;
+  }
+
+  #blog-article > * {
+    margin: 10px; /* Adjust the margin value as needed */
+  }
+  #blog-article img {
+    height: 30rem;
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,168 @@
+/* @custom-media --mobile-viewport (max-width: 767px); */
+@custom-media --viewport-medium (width <= 768px);
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* html {
+  color-scheme: light dark;
+} */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Typography - generated on https://realtimecolors.com/ */
+:root {
+  /*
+  Color palette
+  see https://realtimecolors.com/
+  see https://coolors.co/
+  */
+  /* --clr-text-primary: hsl(0, 0%, 2%); */
+  /* --clr-text-primary: rgb(255, 255, 255); */
+  --clr-text-primary: #253443;
+  --clr-text-secondary: #253443;
+  /* --clr-text-secondary: rgb(256, 256, 256); */
+  /* --clr-background: hsl(0, 0%, 98%); */
+  /* --clr-background: #253443; */
+  --clr-background: #eceef1;
+  --clr-primary: rgb(33, 156, 103);
+  --clr-secondary: hsl(244, 65%, 90%);
+  /* --clr-accent: hsl(334, 65%, 50%); */
+  --clr-accent: #253443;
+
+  /* Font families 
+  https://www.fontpair.co/
+  */
+  --ff-base: 'Oswald', sans-serif;
+  /* --ff-accent: 'Montserrat', sans-serif; */
+  --fw-normal: 200;
+  --fw-bold: 700;
+
+  /* Font sizes 
+  see https://utopia.fyi/
+  */
+  --fs-xs: (0.63rem, calc(0.92rem + -0.16vw), 0.89rem);
+  --fs-s: clamp(0.88rem, calc(1.01rem + -0.07vw), 1rem);
+  --fs-m: clamp(1.13rem, calc(1.11rem + 0.07vw), 1.25rem);
+  --fs-l: clamp(1.27rem, calc(1.21rem + 0.3vw), 1.77rem);
+  --fs-xl: clamp(1.6rem, calc(1.37rem + 1.15vw), 3.53rem);
+  --fs-xxl: clamp(2.03rem, calc(1.43rem + 3vw), 7.07rem);
+
+  /* Spacing */
+  --padding: 1.2rem;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  font-size: var(--fs-m);
+  line-height: var(--fs-m);
+  font-family: var(--ff-base);
+  font-weight: var(--fw-normal);
+  color: var(--clr-text-secondary);
+  background-color: var(--clr-background);
+  overflow-x: hidden;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+h1,
+h2,
+h3 {
+  /* font-family: var(--ff-accent); */
+  line-height: 1.1;
+  /* Todo: deactivate warning*/
+  text-wrap: balance;
+  /* margin: 0 0 1rem 0; */
+}
+
+.flow > :where(:not(:first-child)) {
+  margin-top: var(--flow-space, 1em);
+}
+
+h1 {
+  font-size: var(--fs-xxl);
+  /* color: var(--clr-primary); */
+}
+
+h2 {
+  font-size: var(--fs-l);
+  --flow-space: 1.5em;
+}
+
+h3 {
+  font-size: var(--fs-l);
+  --flow-space: 1.3em;
+}
+
+a {
+  color: var(--clr-text-primary);
+  text-decoration: none;
+}
+
+/* a:hover,
+a:focus {
+  font-weight: 700;
+} */
+
+.wrapper {
+  width: min(100% - 4rem, 65ch);
+  margin-inline: auto;
+}
+
+.visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+#embed-header {
+  display: none !important;
+}
+
+.button-class {
+  padding: 0.4em 0.8em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #fff;
+  background-color: var(--clr-accent);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  font-family: var(--ff-base);
+}
+
+.button-class:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.button-class:active {
+  transform: translateY(-1px);
+}

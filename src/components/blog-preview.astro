@@ -1,0 +1,58 @@
+---
+import type {Post} from '../types/blog';
+
+import BlogPreviewArticles from './blog-preview-articles.astro';
+
+const res = await fetch('http://seefalke.info/wp-json/wp/v2/posts');
+const posts = (await res.json()) as Array<Post>;
+---
+
+<section class="recent-posts-container">
+  <header class="recent-posts-header">
+    <h2>Neuste Beiträge</h2>
+    <a href="/blog">Zum Blog</a>
+  </header>
+
+  {(<BlogPreviewArticles posts={posts} maxPosts={3} />)}
+</section>
+
+<style>
+  h2 {
+    font-size: var(--fs-xxl);
+  }
+
+  .recent-posts-container {
+    padding: var(--padding);
+  }
+
+  .recent-posts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--clr-text-primary);
+    padding-bottom: var(--padding);
+    margin: var(--padding) 0;
+    white-space: nowrap;
+  }
+
+  .recent-posts-header > a::after {
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-right-width: 2px;
+    border-right-style: solid;
+    content: '';
+    display: inline-block;
+    margin-left: 0.3em;
+    position: relative;
+    pointer-events: none;
+    width: 6px;
+    height: 6px;
+    transform: rotate(45deg);
+    transition: all 0.15s ease 0s;
+    vertical-align: middle;
+  }
+
+  .recent-posts-header a:hover {
+    color: var(--clr-accent);
+  }
+</style>

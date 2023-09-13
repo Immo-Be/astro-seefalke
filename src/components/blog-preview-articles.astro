@@ -1,0 +1,123 @@
+---
+import type {Post} from '../types/blog';
+
+import BlogPostImage from './blog-post-image.astro';
+import CssSwipeContainer from './css-swipe-container.astro';
+import FormattedDate from './formatted-date.astro';
+import GoogleMaps from './google-maps.astro';
+
+interface Props {
+  posts: Post[];
+  maxPosts?: number;
+}
+
+const {posts, maxPosts} = Astro.props;
+---
+
+<div class="blog-container">
+  {
+    posts.map((post, index) => {
+      const isFirstElement = index === 0;
+      if (maxPosts && index >= maxPosts) return null;
+
+      return (
+        <div class:list={[{'item-1': isFirstElement}]}>
+          <a href={`blog/${post.slug}`} class="">
+            <CssSwipeContainer>
+              {isFirstElement && <GoogleMaps tripCoords={post.acf.coords} />}
+              <BlogPostImage src={post.acf.url_title_image} alt="" />
+            </CssSwipeContainer>
+            <p class="date">
+              <FormattedDate date={new Date(post.acf.pubdate)} />,{' '}
+              {post.acf.type_of_post}
+            </p>
+            <h3 class="rendered-title">{post.title.rendered}</h3>
+          </a>
+        </div>
+      );
+    })
+  }
+</div>
+
+<style>
+  .blog-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 767px) {
+    .blog-container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 767px) {
+    .blog-container {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px 60px;
+    }
+
+    .item-1 {
+      grid-area: auto / auto / span 2 / span 2;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .date {
+    margin-block: calc(var(--padding) / 2);
+    color: rgb(var(--gray));
+  }
+
+  article {
+  }
+
+  .rendered-title {
+    font-size: var(--fs-m);
+    position: relative;
+    margin: 0;
+    color: #333;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: var(--padding);
+    line-height: var(--fs-l);
+  }
+
+  .rendered-title::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 1px;
+    background-color: var(--clr-text-secondary);
+    transform-origin: 0 center;
+    transform: scaleX(0);
+    transition: 0.4s ease;
+    transition-property: transform;
+  }
+
+  .rendered-title:hover::before {
+    transform: scaleX(1);
+  }
+
+  p {
+    flex: 1;
+    line-height: 1.4;
+  }
+
+  span {
+    font-size: 12px;
+    font-weight: bold;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2em 0 0 0;
+  }
+</style>

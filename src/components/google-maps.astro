@@ -1,0 +1,96 @@
+---
+interface Props {
+  tripCoords: string;
+  className?: string;
+}
+
+const {tripCoords, className} = Astro.props;
+---
+
+<!--Place for my map -->
+<div class={className} id="map" data-message={tripCoords}></div>
+
+<script>
+  import {initMap} from '../scripts/init-map';
+  import {createConsentText} from '../scripts/create-consent-text';
+
+  const initMapInstance = () => {
+    const map = document.getElementById('map');
+    const cookieConset = localStorage.getItem('cookiesAccepted');
+
+    if (!map) {
+      console.warn('No map found');
+      return;
+    }
+
+    map.addEventListener('click', (event: Event) => {
+      event.preventDefault();
+
+      // Stop the event propagation
+      event.stopPropagation();
+    });
+
+    if (!(cookieConset === 'true')) {
+      createConsentText({element: map});
+    } else {
+      initMap();
+    }
+  };
+
+  initMapInstance();
+
+  // We do not execute initMapInstance() here, because on the first render, the map is instantiated right away
+
+  document.addEventListener('astro:after-swap', () => {
+    const hasPageMap = document.getElementById('map');
+    // Todo: check if page has google maps on
+
+    if (!hasPageMap) {
+      return;
+    }
+    initMapInstance();
+  });
+</script>
+
+<style>
+  /* Set the size of the div element that contains the map */
+  #map {
+    height: 400px;
+    width: 100%;
+  }
+
+  #map .swipe-element {
+    height: 100%;
+  }
+</style>
+
+<style is:global>
+  #animation-control-button {
+    border: 1px solid var(--clr-accent);
+    margin: 1em;
+    padding: 1.2em;
+    opacity: 0.75;
+  }
+
+  /* The outer container */
+  .progress-bar {
+    position: relative;
+    margin-bottom: 1.6rem;
+    width: 100%;
+  }
+
+  /* The range input */
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    background-color: var(--clr-accent);
+    opacity: 0.75;
+
+    outline: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>

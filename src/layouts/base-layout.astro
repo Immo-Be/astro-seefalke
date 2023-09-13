@@ -1,0 +1,48 @@
+---
+import Footer from '../components/footer.astro';
+import Header from '../components/header.astro';
+interface Props {
+  title: string;
+}
+import '../styles/main.css';
+const {title} = Astro.props;
+import {ViewTransitions} from 'astro:transitions';
+---
+
+<!-- Todo: make onwn BaseHead Component -->
+<html lang="en">
+  <head>
+    <ViewTransitions />
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <script>
+      import createCookieBanner from '../scripts/cookie-banner';
+      import {loadThirdPartScripts} from '../scripts/load-third-party-scripts';
+
+      document.addEventListener(
+        'astro:page-load',
+        () => {
+          const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+
+          if (!cookiesAccepted) {
+            createCookieBanner(loadThirdPartScripts);
+          }
+
+          if (cookiesAccepted === 'true') {
+            loadThirdPartScripts();
+          }
+        },
+        {once: true} // This only runs once.
+      );
+    </script>
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <Footer />
+  </body>
+</html>

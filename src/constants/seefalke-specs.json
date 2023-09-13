@@ -1,0 +1,77 @@
+{
+  "wiki": [
+    {
+      "Schiffskennung": {
+        "Schiffstyp": "Freizeitboot",
+        "Motorboottyp": "Sonstige",
+        "Hersteller": "-",
+        "Modell": "-",
+        "Baujahr": "1958",
+        "Jahr des ersten gebauten Modells": "1958",
+        "Beschreibung": "-"
+      }
+    },
+    {
+      "Generelle Informationen": {
+        "Reisegeschwindigkeit": "6 Knoten",
+        "Maximale Geschwindigkeit": "8 Knoten",
+        "Rumpfmaterial": "Eisen",
+        "Kieltyp": "-",
+        "CE-Kategorie": "-",
+        "Klassifikationsgesellschaft": "-",
+        "Heimathafen": "Hamburg",
+        "Dienststatus": "Im Dienst",
+        "Jahr Verschrottet/Verloren": "-"
+      }
+    },
+    {
+      "Dimensionen": {
+        "Gesamtlänge": "12 Meter",
+        "Länge Wasserlinie": "-",
+        "Breite": "4 Meter",
+        "Tiefgang": "-",
+        "Höhe": "5 Meter",
+        "Verdrängung - Leergewicht": "20000 kg",
+        "Verdrängung Voll beladen": "-"
+      }
+    },
+    {
+      "Infos zum Bau": {
+        "Baujahr": "1958-04-01",
+        "Kiel gelegt": "-",
+        "Werft Rumpfnummer": "-",
+        "Rumpfnummer": "-",
+        "Designer Name": "-",
+        "Interner Designer Name": "-",
+        "Werft Standort": "Laboe Kiel",
+        "Datum Verschrottet/Verloren": "-"
+      }
+    },
+    {
+      "Motor": {
+        "Anzahl der Hauptmotoren": 1,
+        "Hauptmotoren-Hersteller": "Ford Lehman",
+        "Motorenmodell": "2722E",
+        "Motorleistung": "80 PS",
+        "Antriebs-/Antriebstyp": 3,
+        "Motordrehzahl": 1500,
+        "Motorhubraum": "-",
+        "Kraftstoffart": "Diesel",
+        "Kraftstoffverbrauch": "5 Liter/Stunde",
+        "Kraftstoffverbrauch pro Seemeile": "-",
+        "Reichweite bei 12 Knoten": "-"
+      }
+    },
+    {
+      "Unterkunft": {
+        "Gästekabinen": "-",
+        "Gästeschlafplätze": "-",
+        "Besatzungskabinen": "-",
+        "Besatzungsschlafplätze": "-",
+        "Gäste-WCs": "-",
+        "Besatzungs-WCs": "-",
+        "Maximale Anzahl der Passagiere": "-"
+      }
+    }
+  ]
+}

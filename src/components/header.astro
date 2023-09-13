@@ -1,0 +1,320 @@
+---
+import Link from './link.astro';
+---
+
+<header id="header" class="header sticky" transition:persist>
+  <div class="header-content">
+    <a href="/">Seefalke</a>
+  </div>
+  <input aria-controls="primary-navigation" type="checkbox" id="menu" />
+  <label for="menu" class="mobile-nav-toggle" aria-expanded="false">
+    <div aria-hidden="true"></div>
+  </label>
+  <nav>
+    <ul data-visible="false" id="primary-navigation" class="primary-navigation">
+      <li data-view="home">
+        <a href="/">Home</a>
+      </li>
+      <li data-view="wo-ist">
+        <a href="/wo-ist">Wo ist</a>
+      </li>
+      <li data-view="blog">
+        <a href="/blog">Blog</a>
+      </li>
+      <li data-view="kontakt">
+        <Link href="/kontakt">Kontakt</Link>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const header = document.getElementById('header');
+  if (!header) {
+    throw new Error('No header found');
+  }
+
+  window.onscroll = () => {
+    if (header) {
+      if (window.scrollY > 0) {
+        header.classList.add('move');
+      } else {
+        header.classList.remove('move');
+      }
+    }
+  };
+
+  const primaryNav = document.querySelector('.primary-navigation');
+  const navToggle = document.querySelector('.mobile-nav-toggle');
+
+  if (!primaryNav || !navToggle) {
+    throw new Error('No primaryNav or navToggle found');
+  }
+
+  const checkbox = document.getElementById('menu') as HTMLInputElement;
+
+  const listItems = primaryNav.querySelectorAll('li');
+
+  // We cannot use Astro.url because it is not available
+  // Because of transition:persist, we need to get the current path on the client side
+  // const currentPath = Astro.url.pathname;
+
+  // On the first load, we need to set the selected item
+  const url = new URL(window.location.href);
+  if (url.pathname === '/') {
+    listItems[0].setAttribute('data-selected', 'true');
+  } else {
+    listItems.forEach((item) => {
+      if (item.getAttribute('data-view') === url.pathname.slice(1)) {
+        item.setAttribute('data-selected', 'true');
+      }
+    });
+  }
+
+  listItems.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      listItems.forEach((item) => {
+        if (item.getAttribute('data-selected')) {
+          item.setAttribute('data-selected', 'false');
+        }
+      });
+      item.setAttribute('data-selected', 'true');
+      // Remove the 'selected' class from all <li> elements
+      primaryNav.setAttribute('data-visible', 'false');
+      navToggle.setAttribute('aria-expanded', 'false');
+      if (checkbox) {
+        checkbox.checked = false;
+      }
+    });
+  });
+
+  if (navToggle && primaryNav) {
+    navToggle.addEventListener('click', () => {
+      const visibility = primaryNav.getAttribute('data-visible');
+      if (visibility === 'true') {
+        primaryNav.setAttribute('data-visible', 'false');
+        navToggle.setAttribute('aria-expanded', 'false');
+      } else {
+        primaryNav.setAttribute('data-visible', 'true');
+        navToggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+  }
+
+  document.addEventListener('click', (event) => {
+    if (!header.contains(event.target as Node)) {
+      // The click occurred outside of the element
+      if (primaryNav.getAttribute('data-visible') === 'true') {
+        primaryNav.setAttribute('data-visible', 'false');
+        navToggle.setAttribute('aria-expanded', 'false');
+        checkbox.checked = false;
+      }
+    }
+  });
+</script>
+
+<style>
+  header {
+    display: flex;
+    position: static;
+    top: 0;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--padding);
+  }
+
+  li {
+    height: fit-content;
+  }
+
+  [data-selected='true'] {
+    font-weight: 400;
+  }
+
+  .mobile-nav-toggle {
+    position: relative;
+    margin-left: auto;
+    display: block;
+    width: 50px;
+    height: 50px;
+    z-index: 999;
+  }
+  .mobile-nav-toggle > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    background-color: var(--clr-text-primary);
+    transform: translate(-50%, -50%);
+  }
+  .mobile-nav-toggle > div:before,
+  .mobile-nav-toggle > div:after {
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 2px;
+    background-color: var(--clr-text-primary);
+  }
+  .mobile-nav-toggle > div:before {
+    transform: translateY(-5px);
+    animation: burger3 250ms linear;
+  }
+  @keyframes burger3 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-5px) rotate(0deg);
+    }
+  }
+  .mobile-nav-toggle > div:after {
+    transform: translateY(5px);
+    animation: burger4 250ms linear;
+  }
+  @keyframes burger4 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(5px) rotate(0deg);
+    }
+  }
+
+  .menu {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    margin: 0;
+    padding: 100px 15px 0;
+    background-color: var(--clr-text-primary);
+    transition: height 150ms linear;
+    z-index: 998;
+  }
+  .menu li a {
+    color: #333;
+  }
+  .menu li .dropdown {
+    display: none;
+  }
+  #menu {
+    display: none;
+  }
+  #menu:checked ~ .mobile-nav-toggle > div {
+    visibility: hidden;
+  }
+  #menu:checked ~ .mobile-nav-toggle > div:before,
+  #menu:checked ~ .mobile-nav-toggle > div:after {
+    visibility: visible;
+    background-color: var(--clr-text-primary);
+    transform-origin: center center;
+    transform: translateY(0);
+    transition: all 250ms linear;
+  }
+  #menu:checked ~ .mobile-nav-toggle > div:before {
+    transform: rotate(-45deg);
+    animation: burger1 250ms linear;
+  }
+  @keyframes burger1 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(0) rotate(-45deg);
+    }
+  }
+  #menu:checked ~ .mobile-nav-toggle > div:after {
+    transform: rotate(45deg);
+    animation: burger2 250ms linear;
+  }
+  @keyframes burger2 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(0) rotate(45deg);
+    }
+  }
+  #menu:checked ~ .menu {
+    display: block;
+    height: 100%;
+    transition: height 150ms linear;
+  }
+
+  .primary-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+  }
+
+  .primary-navigation[data-visible='true'] {
+    transform: translateX(0%);
+  }
+
+  @media (max-width: 35em) {
+    .primary-navigation {
+      inset: 0 0 0 30%;
+      position: fixed;
+      height: 100vh;
+      flex-direction: column;
+      padding: min(20vh, 10rem) 2em;
+      background: hsl(0 0% 100% / 0.1);
+      transform: translateX(100%);
+      transition: transform 0.3s ease-out;
+      z-index: -1;
+      background-color: var(--clr-background);
+    }
+
+    li {
+      font-size: var(--fs-xl);
+      padding-bottom: 2rem;
+    }
+  }
+
+  @media (min-width: 35em) {
+    .menu {
+      display: none;
+    }
+    .mobile-nav-toggle {
+      display: none;
+    }
+    nav {
+      flex-grow: 0.2;
+    }
+    .primary-navigation {
+      justify-content: space-between;
+    }
+
+    .primary-navigation li {
+      margin-left: 1rem;
+    }
+  }
+  .sticky {
+    position: sticky;
+    transition-property: all;
+    transition-duration: 0.1s;
+    box-shadow: none;
+    z-index: 9999;
+  }
+  .move {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+  }
+</style>
