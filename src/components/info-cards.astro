@@ -7,42 +7,51 @@ import CssSwipeContainer from './css-swipe-container.astro';
 const wiki = seefalkeSpecs.wiki;
 ---
 
-<CssSwipeContainer class="info-card-container" gridOnDesktop>
-  <section class="info-text fast-scroll">
-    <p>Ein paar Eckdaten*</p>
-    <span
-      >*Quelle: <a
-        target="_blank"
-        href="https://www.marinetraffic.com/en/ais/details/ships/shipid:7731198/mmsi:211796470/imo:0/vessel:SEEFALKE"
-        >AIS</a
-      ></span
-    >
-  </section>
-  {
-    wiki.map((entry) => {
-      const tableName = Object.keys(entry)[0] as keyof typeof entry;
-      const tableData: ShipWiki['wiki'][number][string] = entry[
-        tableName
-      ] as ShipWiki['wiki'][number][string];
+<div class="info-card-container">
+  <CssSwipeContainer class="background" gridOnDesktop>
+    <section class="info-text fast-scroll">
+      <p>Ein paar Eckdaten*</p>
+      <span
+        >*Quelle: <a
+          target="_blank"
+          href="https://www.marinetraffic.com/en/ais/details/ships/shipid:7731198/mmsi:211796470/imo:0/vessel:SEEFALKE"
+          >AIS</a
+        ></span
+      >
+    </section>
+    {
+      wiki.map((entry) => {
+        const tableName = Object.keys(entry)[0] as keyof typeof entry;
+        const tableData: ShipWiki['wiki'][number][string] = entry[
+          tableName
+        ] as ShipWiki['wiki'][number][string];
 
-      return (
-        <table class="card">
-          <th colspan="2">{tableName.replace(/_/g, ' ')}</th>
-          {Object.keys(tableData).map((key) => {
-            return (
-              <tr>
-                <td>{key.replace(/_/g, ' ')}</td>
-                <td>{tableData[key]}</td>
-              </tr>
-            );
-          })}
-        </table>
-      );
-    })
-  }
-</CssSwipeContainer>
+        return (
+          <table class="card">
+            <th colspan="2">{tableName.replace(/_/g, ' ')}</th>
+            {Object.keys(tableData).map((key) => {
+              return (
+                <tr>
+                  <td>{key.replace(/_/g, ' ')}</td>
+                  <td>{tableData[key]}</td>
+                </tr>
+              );
+            })}
+          </table>
+          // <div>HI</div>
+        );
+      })
+    }
+  </CssSwipeContainer>
+</div>
 
 <style>
+  .background {
+    background-color: var(--clr-accent);
+  }
+  .info-card-container {
+    padding: var(--padding);
+  }
   .info-text {
     background-color: transparent;
     border: none;
@@ -62,7 +71,7 @@ const wiki = seefalkeSpecs.wiki;
 
   .card {
     padding: var(--padding);
-    height: 280px;
+    word-wrap: break-word;
   }
 
   .card:hover {
@@ -71,7 +80,6 @@ const wiki = seefalkeSpecs.wiki;
   .info-card-container {
     width: 100vw;
     background-color: var(--clr-accent);
-    gap: 2rem;
   }
   * {
     box-sizing: border-box;

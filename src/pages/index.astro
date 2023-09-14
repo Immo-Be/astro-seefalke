@@ -3,7 +3,6 @@ import InfoCards from '../components/info-cards.astro';
 import BlogPreivew from '../components/blog-preview.astro';
 import BaseLayout from '../layouts/base-layout.astro';
 import CustomShapeBottom from '../components/custom-shape-bottom.astro';
-import CustomShapeTop from '../components/custom-shape-top.astro';
 
 import {Image} from 'astro:assets';
 
@@ -70,8 +69,8 @@ import SVGIcon from '/src/icons/arrow-down.svg';
       </div>
     </section>
 
-    <CustomShapeTop />
-
+    <!-- <CustomShapeTop /> -->
+    <CustomShapeBottom isRotated />
     <InfoCards />
     <CustomShapeBottom />
     <BlogPreivew />
@@ -80,11 +79,6 @@ import SVGIcon from '/src/icons/arrow-down.svg';
 </BaseLayout>
 
 <script>
-  new PerformanceObserver((entryList) => {
-    for (const entry of entryList.getEntries()) {
-      console.log('Layout shift:', entry);
-    }
-  }).observe({type: 'layout-shift', buffered: true});
   window.addEventListener('scroll', () => {
     const scrollPosition = window.scrollY;
     const slideInDiv = document.querySelector(
@@ -202,8 +196,8 @@ import SVGIcon from '/src/icons/arrow-down.svg';
 
   .text-wrapper {
     /* min-width: 300px;  */
-    min-height: 332px;
-    min-width: 420px;
+    /* min-height: 332px; */
+    /* min-width: 300px; */
     text-align: center;
 
     flex: 2;
