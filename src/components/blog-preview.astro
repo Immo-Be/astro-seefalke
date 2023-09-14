@@ -10,7 +10,7 @@ const posts = (await res.json()) as Array<Post>;
 <section class="recent-posts-container">
   <header class="recent-posts-header">
     <h2>Neuste Beiträge</h2>
-    <a href="/blog">Zum Blog</a>
+    <a href="/astro-seefalke/blog">Zum Blog</a>
   </header>
 
   {(<BlogPreviewArticles posts={posts} maxPosts={3} />)}

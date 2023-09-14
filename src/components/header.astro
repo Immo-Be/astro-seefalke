@@ -12,17 +12,17 @@ import Link from './link.astro';
   </label>
   <nav>
     <ul data-visible="false" id="primary-navigation" class="primary-navigation">
-      <li data-view="home">
+      <li data-view="astro-seefalke/">
         <a href="/astro-seefalke/">Home</a>
       </li>
-      <li data-view="wo-ist">
+      <li data-view="astro-seefalke/wo-ist">
         <a href="/astro-seefalke/wo-ist">Wo ist</a>
       </li>
-      <li data-view="blog">
+      <li data-view="astro-seefalke/blog">
         <a href="/astro-seefalke/blog">Blog</a>
       </li>
-      <li data-view="kontakt">
-        <Link href="astro-seefalke/kontakt">Kontakt</Link>
+      <li data-view="astro-seefalke/kontakt">
+        <Link href="/astro-seefalke/kontakt">Kontakt</Link>
       </li>
     </ul>
   </nav>
@@ -55,8 +55,9 @@ import Link from './link.astro';
 
   const listItems = primaryNav.querySelectorAll('li');
 
-  // We cannot use Astro.url because it is not available
+  // We cannot use Astro.url because it is not available on client side
   // Because of transition:persist, we need to get the current path on the client side
+  // Fix this?
   // const currentPath = Astro.url.pathname;
 
   // On the first load, we need to set the selected item
@@ -70,6 +71,8 @@ import Link from './link.astro';
       }
     });
   }
+
+  console.log(url.pathname.slice(1));
 
   listItems.forEach((item) => {
     item.addEventListener('click', (e) => {
