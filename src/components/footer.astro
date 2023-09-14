@@ -1,4 +1,4 @@
-<footer>
+<footer class="footer">
   <nav>
     <ul>
       <li>
@@ -12,8 +12,14 @@
 </footer>
 
 <style>
-  footer {
-    padding: 1rem;
+  .footer {
+    padding: var(--padding);
+    background-color: var(--clr-accent);
+    /* color: var(--clr-background); */
+  }
+
+  .footer a {
+    color: var(--clr-background);
   }
 
   nav ul {

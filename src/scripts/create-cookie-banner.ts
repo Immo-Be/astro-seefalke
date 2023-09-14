@@ -41,7 +41,7 @@ export default (accept: () => void, deny: () => void) => {
 
   // Create an "Erlauben" button
   const acceptButton = document.createElement('button');
-  acceptButton.className = 'accept-cookies';
+  acceptButton.className = 'button-class';
   acceptButton.id = 'accept-cookies';
   acceptButton.textContent = 'Erlauben';
   acceptButton.addEventListener('click', () => {
@@ -51,7 +51,7 @@ export default (accept: () => void, deny: () => void) => {
 
   // Create an "Ablehnen" button
   const declineButton = document.createElement('button');
-  declineButton.className = 'decline-cookies';
+  declineButton.className = 'button-class';
   declineButton.id = 'decline-cookies';
   declineButton.textContent = 'Ablehnen';
   declineButton.addEventListener('click', () => {
@@ -101,25 +101,25 @@ export default (accept: () => void, deny: () => void) => {
   buttonContainer.style.flexDirection = 'row';
 
   // Apply inline styles for the "Erlauben" button
-  acceptButton.style.width = '80px';
-  acceptButton.style.height = '30px';
-  acceptButton.style.backgroundColor = '#7b57ff';
-  acceptButton.style.transitionDuration = '0.2s';
-  acceptButton.style.border = 'none';
-  acceptButton.style.color = 'rgb(241, 241, 241)';
-  acceptButton.style.cursor = 'pointer';
-  acceptButton.style.fontWeight = '600';
-  acceptButton.style.borderRadius = '20px';
+  // acceptButton.style.width = '80px';
+  // acceptButton.style.height = '30px';
+  // acceptButton.style.backgroundColor = '#7b57ff';
+  // acceptButton.style.transitionDuration = '0.2s';
+  // acceptButton.style.border = 'none';
+  // acceptButton.style.color = 'rgb(241, 241, 241)';
+  // acceptButton.style.cursor = 'pointer';
+  // acceptButton.style.fontWeight = '600';
+  // acceptButton.style.borderRadius = '20px';
 
-  // Apply inline styles for the "Ablehnen" button
-  declineButton.style.width = '80px';
-  declineButton.style.height = '30px';
-  declineButton.style.backgroundColor = '#dadada';
-  declineButton.style.transitionDuration = '0.2s';
-  declineButton.style.color = 'rgb(46, 46, 46)';
-  declineButton.style.border = 'none';
-  declineButton.style.fontWeight = '600';
-  declineButton.style.borderRadius = '20px';
+  // // Apply inline styles for the "Ablehnen" button
+  // declineButton.style.width = '80px';
+  // declineButton.style.height = '30px';
+  // declineButton.style.backgroundColor = '#dadada';
+  // declineButton.style.transitionDuration = '0.2s';
+  // declineButton.style.color = 'rgb(46, 46, 46)';
+  // declineButton.style.border = 'none';
+  // declineButton.style.fontWeight = '600';
+  // declineButton.style.borderRadius = '20px';
 
   // Add hover styles for the buttons
   acceptButton.addEventListener('mouseover', () => {

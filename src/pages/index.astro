@@ -19,8 +19,8 @@ import SVGIcon from '/src/icons/arrow-down.svg';
           src={localSeefalke}
           alt="bild der seefalke"
           class="index-image"
-          width={700}
-          height={500}
+          width={300}
+          height={400}
           loading={'eager'}
         />
 
@@ -70,9 +70,9 @@ import SVGIcon from '/src/icons/arrow-down.svg';
     </section>
 
     <!-- <CustomShapeTop /> -->
-    <CustomShapeBottom isRotated />
+    <!-- <CustomShapeBottom isRotated /> -->
     <InfoCards />
-    <CustomShapeBottom />
+    <!-- <CustomShapeBottom /> -->
     <BlogPreivew />
   </main>
   <!-- <CookieConsent /> -->
@@ -94,13 +94,13 @@ import SVGIcon from '/src/icons/arrow-down.svg';
     ) as HTMLElement | null;
 
     if (fastScroll) {
-      fastScroll.style.transform = `translateY(${translateYValue}px)`;
+      fastScroll.style.transform = `translateY(${translateYValue * 1.7}px)`;
     }
 
     // Move the slide-in div in from the right when scrolling up
 
     if (slideInDiv) {
-      slideInDiv.style.transform = `translateY(${translateYValue * 0.8}px)`;
+      slideInDiv.style.transform = `translateY(${translateYValue * 1.8}px)`;
       // slideInDiv.style.top = `calc(100% - ${scrollPosition}px)`;
       // Move the scroll-up div upwards when scrolling up
       // scrollUpDiv.style.transform = `translateY(${scrollPosition}px)`;
@@ -138,11 +138,11 @@ import SVGIcon from '/src/icons/arrow-down.svg';
     z-index: -1;
   }
 
-  @media (--viewport-medium) {
+  /* @media (--viewport-medium) {
     .cta-slide-in {
       display: block;
     }
-  }
+  } */
 
   .fast-scroll {
     /* background-color: #f0f0f0; */
@@ -154,8 +154,8 @@ import SVGIcon from '/src/icons/arrow-down.svg';
   }
 
   .text-wrapper {
-    min-width: 300px;
-    text-align: center;
+    min-width: 16rem;
+    text-align: left;
 
     flex: 2;
     vertical-align: baseline;
@@ -165,7 +165,6 @@ import SVGIcon from '/src/icons/arrow-down.svg';
   img {
     flex: 1;
     object-fit: contain;
-    height: 300px;
   }
 
   .filmset-info {

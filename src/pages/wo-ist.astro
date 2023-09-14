@@ -5,11 +5,9 @@ const currentPath = Astro.url.pathname;
 
 <BaseLayout title="Wo ist die Seefalke">
   <div class="wo-ist-container">
-    <p>
-      Wenn du wissen möchtest, wo die Seefalke gerade ist, kannst du das hier
-      sehen:
-    </p>
+    <h2>Finde die Seefalke</h2>
     <div id="vesselfinder" data-path={currentPath}></div>
+    <p>Die letzte aktulle Position der Seefalke wird hier gezeigt</p>
   </div>
 </BaseLayout>
 
@@ -56,6 +54,12 @@ const currentPath = Astro.url.pathname;
 <style>
   .wo-ist-container > p {
     padding-inline: var(--padding);
+  }
+
+  h2 {
+    font-size: var(--fs-xxl);
+    line-height: var(--fs-xxl);
+    margin: var(--padding);
   }
   .wo-ist-container {
     display: flex;

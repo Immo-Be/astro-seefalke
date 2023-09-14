@@ -27,12 +27,14 @@ const posts = (await res.json()) as Array<Post>;
 
   .recent-posts-header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: baseline;
     border-bottom: 1px solid var(--clr-text-primary);
     padding-bottom: var(--padding);
     margin: var(--padding) 0;
     white-space: nowrap;
+    gap: 12px;
   }
 
   .recent-posts-header > a::after {

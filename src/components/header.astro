@@ -1,10 +1,27 @@
 ---
 import Link from './link.astro';
+import localSeefalke from '../images/seefalke-neu.webp';
+
+import {Image} from 'astro:assets';
 ---
 
 <header id="header" class="header sticky" transition:persist>
   <div class="header-content">
-    <a href="/astro-seefalke/">Seefalke</a>
+    <a href="/astro-seefalke/"
+      >{
+        (
+          <Image
+            src={localSeefalke}
+            alt=""
+            style={{
+              width: '34px',
+              height: '34px',
+              objectFit: 'contain'
+            }}
+          />
+        )
+      }</a
+    >
   </div>
   <input aria-controls="primary-navigation" type="checkbox" id="menu" />
   <label for="menu" class="mobile-nav-toggle" aria-expanded="false">
@@ -71,8 +88,6 @@ import Link from './link.astro';
       }
     });
   }
-
-  console.log(url.pathname.slice(1));
 
   listItems.forEach((item) => {
     item.addEventListener('click', (e) => {
