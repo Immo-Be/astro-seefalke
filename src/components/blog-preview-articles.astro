@@ -17,6 +17,7 @@ const {posts, maxPosts} = Astro.props;
 <div class="blog-container">
   {
     posts.map((post, index) => {
+      // We show a map only for the most recent post
       const isFirstElement = index === 0;
       if (maxPosts && index >= maxPosts) return null;
 
@@ -24,7 +25,9 @@ const {posts, maxPosts} = Astro.props;
         <div class:list={[{'item-1': isFirstElement}]}>
           <a href={`blog/${post.slug}`} class="">
             <CssSwipeContainer>
-              {isFirstElement && <GoogleMaps tripCoords={post.acf.coords} />}
+              {isFirstElement && post.acf.coords && (
+                <GoogleMaps tripCoords={post.acf.coords} />
+              )}
               <BlogPostImage src={post.acf.url_title_image} alt="" />
             </CssSwipeContainer>
             <p class="date">

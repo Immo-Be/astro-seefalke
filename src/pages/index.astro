@@ -11,13 +11,13 @@ import localSeefalke from '../images/seefalke-neu.webp';
 import SVGIcon from '/src/icons/arrow-down.svg';
 ---
 
-<BaseLayout title="Welcome to Astro.">
+<BaseLayout title="Die Seefalke">
   <main>
     <section class="header-scroll">
       <div class="intro flow fast-scroll">
         <Image
           src={localSeefalke}
-          alt=""
+          alt="bild der seefalke"
           class="index-image"
           width={700}
           height={500}
@@ -149,65 +149,23 @@ import SVGIcon from '/src/icons/arrow-down.svg';
     transform: translateY(0);
   }
 
-  .fade-scroll {
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
-  }
-
   .index-image {
     margin-inline: var(--padding);
   }
-  /* .custom-shape-divider {
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    background-color: var(--clr-accent);
-  }
-
-  .custom-shape-divider svg {
-    position: relative;
-    display: block;
-    width: calc(182% + 1.3px);
-    height: 56px;
-    transform: rotateY(180deg);
-  }
-
-  .custom-shape-divider .shape-fill {
-    fill: var(--clr-background);
-  }
-
-  .custom-shape-divider-top-1692959622 {
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-  }
-
-  .custom-shape-divider-top-1692959622 svg {
-    position: relative;
-    display: block;
-    width: calc(141% + 1.3px);
-    height: 30px;
-    transform: rotateY(180deg);
-  }
-
-  .custom-shape-divider-top-1692959622 .shape-fill {
-    fill: var(--clr-accent);
-  } */
 
   .text-wrapper {
-    /* min-width: 300px;  */
-    /* min-height: 332px; */
-    /* min-width: 300px; */
+    min-width: 300px;
     text-align: center;
 
     flex: 2;
     vertical-align: baseline;
     line-height: var(--fs-xl);
-    /* text-align: left; */
   }
 
   img {
     flex: 1;
+    object-fit: contain;
+    height: 300px;
   }
 
   .filmset-info {
