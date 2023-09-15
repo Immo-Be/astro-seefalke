@@ -1,15 +1,12 @@
 ---
-import BaseLayout from '../layouts/base-layout.astro';
 const currentPath = Astro.url.pathname;
 ---
 
-<BaseLayout title="Wo ist die Seefalke">
-  <div class="wo-ist-container">
-    <h2>Finde die Seefalke</h2>
-    <div id="vesselfinder" data-path={currentPath}></div>
-    <p>Die letzte aktulle Position der Seefalke wird hier gezeigt</p>
-  </div>
-</BaseLayout>
+<div class="wo-ist-container">
+  <h2>Finde die Seefalke</h2>
+  <p>Die letzte aktulle Position der Seefalke wird hier gezeigt</p>
+  <div id="vesselfinder" data-path={currentPath}></div>
+</div>
 
 <script>
   import {createConsentText} from '../scripts/create-consent-text';
@@ -41,12 +38,10 @@ const currentPath = Astro.url.pathname;
   // The "astro:after-swap" event is fired before EVERY page is loaded.
   // We can use this to check if the current page is the one we want to run our script on.
   document.addEventListener('astro:after-swap', () => {
-    const path = document
-      .getElementById('vesselfinder')
-      ?.getAttribute('data-path');
+    const path = document.getElementById('vesselfinder');
 
     // If the current page is not the one we want, return early.
-    if (path !== '/wo-ist') return;
+    if (!path) return;
     initVesselFinder();
   });
 </script>
@@ -54,6 +49,7 @@ const currentPath = Astro.url.pathname;
 <style>
   .wo-ist-container > p {
     padding-inline: var(--padding);
+    margin-bottom: var(--padding);
   }
 
   h2 {

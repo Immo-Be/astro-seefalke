@@ -31,7 +31,7 @@ const {posts, maxPosts} = Astro.props;
               <BlogPostImage src={post.acf.url_title_image} alt="" />
             </CssSwipeContainer>
             <p class="date">
-              <FormattedDate date={new Date(post.acf.pubdate)} />,{' '}
+              <FormattedDate date={new Date(post.acf.pubdate)} />,
               {post.acf.type_of_post}
             </p>
             <h3 class="rendered-title">{post.title.rendered}</h3>
@@ -49,6 +49,7 @@ const {posts, maxPosts} = Astro.props;
     grid-template-columns: repeat(2, 1fr);
     max-width: 1280px;
     margin: 0 auto;
+    border-bottom: 1px solid var(--clr-text-primary);
   }
 
   @media (max-width: 767px) {
