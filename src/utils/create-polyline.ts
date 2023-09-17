@@ -32,7 +32,7 @@ export const createPolyline = (
         fixedRotation: true
       }
     ],
-    strokeColor: '#253443;'
+    strokeColor: '#283845'
   });
 
   return path;

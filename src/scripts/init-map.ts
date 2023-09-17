@@ -75,7 +75,7 @@ export async function initMap(): Promise<void> {
   const animations: AnimationObject = {
     isPaused: false,
     hasStarted: false,
-    interval: 0,
+    interval: setInterval(() => {}, 0),
     icon: {
       value: 0,
       intervalId: 0

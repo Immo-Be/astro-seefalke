@@ -6,7 +6,7 @@ export interface Interval {
 export interface AnimationObject {
   isPaused: boolean;
   hasStarted: boolean;
-  interval: number;
+  interval: ReturnType<typeof setInterval>;
   icon: {
     value: number;
     intervalId: number;

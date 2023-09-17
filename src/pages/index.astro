@@ -96,13 +96,13 @@ import WoIst from '../components/wo-ist.astro';
     ) as HTMLElement | null;
 
     if (fastScroll) {
-      fastScroll.style.transform = `translateY(${translateYValue * 1.7}px)`;
+      fastScroll.style.transform = `translateY(${translateYValue * 1.3}px)`;
     }
 
     // Move the slide-in div in from the right when scrolling up
 
     if (slideInDiv) {
-      slideInDiv.style.transform = `translateY(${translateYValue * 1.8}px)`;
+      slideInDiv.style.transform = `translateY(${translateYValue * 1.2}px)`;
       // slideInDiv.style.top = `calc(100% - ${scrollPosition}px)`;
       // Move the scroll-up div upwards when scrolling up
       // scrollUpDiv.style.transform = `translateY(${scrollPosition}px)`;
@@ -158,6 +158,7 @@ import WoIst from '../components/wo-ist.astro';
   .text-wrapper {
     min-width: 16rem;
     text-align: left;
+    width: 100%;
 
     flex: 2;
     vertical-align: baseline;
