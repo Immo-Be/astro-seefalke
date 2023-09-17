@@ -1,5 +1,6 @@
 /* @custom-media --mobile-viewport (max-width: 767px); */
 @custom-media --viewport-medium (width <= 768px);
+@custom-media --viewport-desktop (width > 768px);
 
 *,
 *::before,
@@ -116,6 +117,12 @@ h3 {
 a {
   color: var(--clr-text-primary);
   text-decoration: none;
+}
+
+@media (--viewport-desktop) {
+  section {
+    margin-bottom: 200px;
+  }
 }
 
 /* a:hover,

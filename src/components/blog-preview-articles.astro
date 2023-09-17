@@ -22,7 +22,11 @@ const {posts, maxPosts} = Astro.props;
       if (maxPosts && index >= maxPosts) return null;
 
       return (
-        <div class:list={[{'item-1': isFirstElement}]}>
+        <div
+          class:list={[
+            {'item-1': isFirstElement},
+            'article-preview-container'
+          ]}>
           <a href={`blog/${post.slug}`} class="">
             <CssSwipeContainer>
               {isFirstElement && post.acf.coords && (

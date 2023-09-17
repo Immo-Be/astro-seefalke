@@ -2,11 +2,11 @@
 const currentPath = Astro.url.pathname;
 ---
 
-<div class="wo-ist-container">
+<section class="wo-ist-container">
   <h2>Finde die Seefalke</h2>
   <p>Die letzte aktulle Position der Seefalke wird hier gezeigt</p>
   <div id="vesselfinder" data-path={currentPath}></div>
-</div>
+</section>
 
 <script>
   import {createConsentText} from '../scripts/create-consent-text';
