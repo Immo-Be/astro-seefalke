@@ -14,14 +14,12 @@ import WoIst from '../components/wo-ist.astro';
 
 <BaseLayout title="Die Seefalke">
   <main>
-    <section class="header-scroll">
+    <section class="introduction">
       <div class="intro flow fast-scroll">
         <Image
           src={localSeefalke}
           alt="bild der seefalke"
           class="index-image"
-          width={300}
-          height={400}
           loading={'eager'}
         />
 
@@ -70,25 +68,14 @@ import WoIst from '../components/wo-ist.astro';
       </div>
     </section>
 
-    <!-- <CustomShapeTop /> -->
-    <!-- <CustomShapeBottom isRotated /> -->
     <InfoCards />
-    <!-- <CustomShapeBottom /> -->
     <BlogPreivew />
     <WoIst />
   </main>
-  <!-- <CookieConsent /> -->
 </BaseLayout>
 
 <script>
   import {animate, scroll, type MotionKeyframesDefinition} from 'motion';
-
-  // document.querySelectorAll('section').forEach((item) => {
-  //   scroll(animate(item, {opacity: [0.6, 1, 1, 0.6]}), {
-  //     target: item,
-  //     offset: ['start end', 'end end', 'start start', 'end start']
-  //   });
-  // });
 
   const initiateWindowAnimation = () => {
     const isMobile = window.innerWidth <= 768 ? true : false;
@@ -130,21 +117,15 @@ import WoIst from '../components/wo-ist.astro';
 
       if (slideInDiv) {
         slideInDiv.style.transform = `translateY(${translateYValue * 1.2}px)`;
-        // slideInDiv.style.top = `calc(100% - ${scrollPosition}px)`;
-        // Move the scroll-up div upwards when scrolling up
-        // scrollUpDiv.style.transform = `translateY(${scrollPosition}px)`;
       }
-
-      // Progress bar representing gallery scroll
     });
   };
 
   initiateWindowAnimation();
 
   // We do not execute initMapInstance() here, because on the first render, the map is instantiated right away
-
   document.addEventListener('astro:after-swap', () => {
-    const isMainPage = document.querySelector('.intro-text');
+    const isMainPage = document.querySelector('.introduction');
     // Todo: check if page has google maps on
 
     if (!isMainPage) {
@@ -155,6 +136,13 @@ import WoIst from '../components/wo-ist.astro';
 </script>
 
 <style>
+  .introduction {
+    padding: var(--padding);
+    text-wrap: balance;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   main {
     width: 100%;
   }
@@ -196,11 +184,11 @@ import WoIst from '../components/wo-ist.astro';
   }
 
   .index-image {
-    margin-inline: var(--padding);
+    object-fit: cover;
   }
 
   .text-wrapper {
-    min-width: 16rem;
+    /* min-width: 16rem; */
     text-align: left;
     width: 100%;
 
@@ -231,16 +219,6 @@ import WoIst from '../components/wo-ist.astro';
     transform: translateY(-50%);
     transition: transform 0.5s ease; /* Smooth transition effect */
   }
-
-  section {
-    position: relative;
-    padding: var(--padding);
-    text-wrap: balance;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* overflow: hidden; */
-  }
   .background-overlay > div {
     /* margin: auto; */
     margin-top: 10vh;
@@ -257,13 +235,5 @@ import WoIst from '../components/wo-ist.astro';
     text-decoration: underline;
     z-index: 20;
     -webkit-text-fill-color: var(--clr-primary-text);
-  }
-
-  .intro {
-    /* min-width: 10rem; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
   }
 </style>

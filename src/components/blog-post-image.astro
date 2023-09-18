@@ -11,7 +11,7 @@ interface Props {
 const {src, width = 20, height = 18, ...attrs} = Astro.props;
 ---
 
-<Image src={src} {...attrs} height={height} width={width} />
+{src.length > 0 && <Image src={src} {...attrs} height={height} width={width} />}
 
 <style>
   :global(img) {

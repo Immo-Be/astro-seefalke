@@ -1,7 +1,7 @@
 import type {AnimationObject} from '../types/google-maps-custom-types';
 import animateIcon from './animate-icon';
 
-const ICONSPEED = 1;
+const ICONSPEED = 1; // Set speed of the icon animation
 
 export const updateProgressBar = (
   progressInput: HTMLInputElement,
