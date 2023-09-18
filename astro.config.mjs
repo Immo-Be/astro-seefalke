@@ -1,8 +1,11 @@
-import {defineConfig} from 'astro/config';
+import { defineConfig } from 'astro/config';
+
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
   scopedStyleStrategy: 'class',
   site: 'https://Immo-Be.github.io',
-  base: '/astro-seefalke'
+  base: '/astro-seefalke',
+  integrations: [sitemap()]
 });
