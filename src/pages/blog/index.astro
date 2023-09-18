@@ -12,7 +12,7 @@ import type {Post} from '../../types/blog';
 //   (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
 // );
 
-const res = await fetch('http://seefalke.info/wp-json/wp/v2/posts');
+const res = await fetch('https://seefalke.info/wp-json/wp/v2/posts');
 const posts = (await res.json()) as Array<Post>;
 ---
 

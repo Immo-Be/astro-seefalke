@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https:///immo-be.github.io/astro-seefalke/sitemap-index.xml
+Sitemap: https://immo-be.github.io/astro-seefalke/sitemap-index.xml
