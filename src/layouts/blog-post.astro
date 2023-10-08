@@ -10,7 +10,7 @@ const {acf} = Astro.props;
 ---
 
 <BaseLayout title="">
-  ´ <CssSwipeContainer class="dimensions">
+  <CssSwipeContainer class="dimensions">
     {(<GoogleMaps tripCoords={acf.coords} />)}
     <BlogPostImage src={acf.url_title_image} alt="" />
   </CssSwipeContainer>
