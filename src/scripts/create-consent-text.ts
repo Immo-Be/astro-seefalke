@@ -1,4 +1,4 @@
-import {setConsent, hideBanner} from './cookie-banner';
+import {setConsent, hideBanner, Consent} from './cookie-banner';
 import {loadThirdPartScripts} from './load-third-party-scripts';
 
 interface Props {
@@ -13,7 +13,7 @@ export const createConsentText = (props: Props) => {
   button.className = 'button-class';
   button.addEventListener('click', () => {
     loadThirdPartScripts();
-    setConsent('true');
+    setConsent(Consent.accepted);
     hideBanner();
   });
   element.innerHTML =

@@ -22,20 +22,23 @@ import {ViewTransitions} from 'astro:transitions';
     <link rel="sitemap" href="/sitemap-index.xml" />
     <title>{title}</title>
     <script>
-      import createCookieBanner from '../scripts/cookie-banner';
+      import createCookieBanner, {
+        Consent,
+        consentStorageItem
+      } from '../scripts/cookie-banner';
       import {loadThirdPartScripts} from '../scripts/load-third-party-scripts';
 
       document.addEventListener(
         'astro:page-load',
         () => {
-          const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+          const isCookiesAccepted = localStorage.getItem(
+            consentStorageItem
+          ) as Consent | null;
 
-          if (!cookiesAccepted) {
-            createCookieBanner(loadThirdPartScripts);
-          }
-
-          if (cookiesAccepted === 'true') {
+          if (isCookiesAccepted === Consent.accepted) {
             loadThirdPartScripts();
+          } else {
+            createCookieBanner(loadThirdPartScripts);
           }
         },
         {once: true} // This only runs once.

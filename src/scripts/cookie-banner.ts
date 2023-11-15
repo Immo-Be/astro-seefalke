@@ -1,7 +1,14 @@
 import createCookieBanner from './create-cookie-banner';
 
-export const setConsent = (value: 'true' | 'false') => {
-  localStorage.setItem('cookiesAccepted', `${value}`);
+export enum Consent {
+  accepted = 'accepted',
+  declined = 'declined'
+}
+
+export const consentStorageItem = 'cookiesAcceptance';
+
+export const setConsent = (value: Consent) => {
+  localStorage.setItem(consentStorageItem, `${value}`);
 };
 
 export const hideBanner = () => {
@@ -14,13 +21,13 @@ export const hideBanner = () => {
 
 export default (loadScripts: () => void) => {
   const acceptCookies = () => {
-    setConsent('true');
+    setConsent(Consent.accepted);
     hideBanner();
     loadScripts();
   };
 
   const declineCookies = () => {
-    setConsent('false');
+    setConsent(Consent.declined);
     hideBanner();
   };
 
