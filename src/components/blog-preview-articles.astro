@@ -27,7 +27,7 @@ const {posts, maxPosts} = Astro.props;
             {'item-1': isFirstElement},
             'article-preview-container'
           ]}>
-          <a href={`/${post.slug}`} class="">
+          <a href={`blog/${post.slug}`} class="">
             <CssSwipeContainer>
               {isFirstElement && post.acf.coords && (
                 <GoogleMaps tripCoords={post.acf.coords} />
