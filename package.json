@@ -12,7 +12,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.0.0",
     "@types/google.maps": "^3.53.5",
-    "astro": "^3.3.2",
+    "astro": "^3.5.4",
     "motion": "^10.16.2"
   },
   "devDependencies": {
