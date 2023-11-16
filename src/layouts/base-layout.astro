@@ -31,11 +31,11 @@ import {ViewTransitions} from 'astro:transitions';
       document.addEventListener(
         'astro:page-load',
         () => {
-          const isCookiesAccepted = localStorage.getItem(
-            consentStorageItem
-          ) as Consent | null;
+          const isCookiesAccepted = Boolean(
+            localStorage.getItem(consentStorageItem) === Consent.accepted
+          );
 
-          if (isCookiesAccepted === Consent.accepted) {
+          if (isCookiesAccepted) {
             loadThirdPartScripts();
           } else {
             createCookieBanner(loadThirdPartScripts);

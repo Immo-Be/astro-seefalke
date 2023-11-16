@@ -9,11 +9,12 @@ const currentPath = Astro.url.pathname;
 </section>
 
 <script>
+  import {consentStorageItem} from '../scripts/cookie-banner';
   import {createConsentText} from '../scripts/create-consent-text';
   import {loadVesselFinder} from '../scripts/load-vesselfinder';
 
   const initVesselFinder = () => {
-    const cookieConsent = localStorage.getItem('cookiesAccepted');
+    const cookieConsent = localStorage.getItem(consentStorageItem);
     const element = document.getElementById('vesselfinder');
 
     if (!element) {

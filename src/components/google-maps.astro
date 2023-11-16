@@ -12,10 +12,13 @@ const {tripCoords, className} = Astro.props;
 <script>
   import {initMap} from '../scripts/init-map';
   import {createConsentText} from '../scripts/create-consent-text';
+  import {Consent, consentStorageItem} from '../scripts/cookie-banner';
 
   const initMapInstance = () => {
     const map = document.getElementById('map');
-    const cookieConset = localStorage.getItem('cookiesAccepted');
+    const isCookiesAccepted = Boolean(
+      localStorage.getItem(consentStorageItem) === Consent.accepted
+    );
 
     if (!map) {
       console.warn('No map found');
@@ -29,7 +32,7 @@ const {tripCoords, className} = Astro.props;
       event.stopPropagation();
     });
 
-    if (!(cookieConset === 'true')) {
+    if (!isCookiesAccepted) {
       createConsentText({element: map});
     } else {
       initMap();
