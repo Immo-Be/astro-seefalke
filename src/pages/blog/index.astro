@@ -2,10 +2,9 @@
 import BaseLayout from '../../layouts/base-layout.astro';
 import BlogPreviewArticles from '../../components/blog-preview-articles.astro';
 
-import type {Post} from '../../types/blog';
+import {fetchBlogPosts} from '../../utils/get-api-url';
 
-const res = await fetch('https://seefalke.info/wp-json/wp/v2/posts');
-const posts = (await res.json()) as Array<Post>;
+const {data: posts} = await fetchBlogPosts();
 ---
 
 <BaseLayout title="blog">

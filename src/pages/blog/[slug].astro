@@ -1,28 +1,35 @@
 ---
 import BlogPost from '../../layouts/blog-post.astro';
-import GoogleMaps from '../../components/google-maps.astro';
 import type {Post} from '../../types/blog';
-// import BlogPost from '../../layouts/BlogPost.astro';
+import axios from 'axios';
+import {fetchBlogPosts} from '../../utils/get-api-url';
 
 const {slug} = Astro.params;
 
-const res = await fetch(
-  'https://seefalke.info/wp-json/wp/v2/posts?slug=' + slug + '&_embed'
-);
-let [post] = (await res.json()) as Post[];
+const {data, status} = await fetchBlogPosts();
+
+if (status !== 200) {
+  throw new Error('Could not fetch posts');
+}
+
+const post = data.find((post: Post) => post.slug === slug);
+
+if (!post) {
+  throw new Error('Could not find post');
+}
 
 export async function getStaticPaths() {
-  const res = await fetch('https://seefalke.info/wp-json/wp/v2/posts');
-  const posts = (await res.json()) as Array<Post>;
+  const {data: posts, status} = await fetchBlogPosts();
+
+  if (status !== 200) {
+    throw new Error('Could not fetch posts');
+  }
+
   return posts.map((post) => ({
     params: {slug: post.slug},
     props: post
   }));
 }
-// type Props = CollectionEntry<'blog'>;
-
-// const post = Astro.props;
-// const { Content } = await post.;
 ---
 
 <BlogPost {...post}>

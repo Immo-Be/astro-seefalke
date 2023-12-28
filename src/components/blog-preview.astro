@@ -1,10 +1,14 @@
 ---
 import type {Post} from '../types/blog';
+import {fetchBlogPosts} from '../utils/get-api-url';
 
 import BlogPreviewArticles from './blog-preview-articles.astro';
 
-const res = await fetch('https://seefalke.info/wp-json/wp/v2/posts');
-const posts = (await res.json()) as Array<Post>;
+const {data: posts, status} = await fetchBlogPosts();
+
+if (status !== 200) {
+  throw new Error('Could not fetch posts');
+}
 ---
 
 <section class="recent-posts-container">
