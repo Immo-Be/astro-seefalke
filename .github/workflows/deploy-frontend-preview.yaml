@@ -1,13 +1,12 @@
 name: Deploy Frontend to Preview
 
 on:
-  push:
-    branches: [frontend/**/*]
   pull_request:
     types: [labeled, synchronize]
 
 jobs:
   log:
+    if: ${{contains(github.event.pull_request.labels.*.name, 'preview') }}
     runs-on: ubuntu-latest
     steps:
       - name: Check for label and branch
