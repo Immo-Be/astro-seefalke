@@ -1,0 +1,21 @@
+name: Deploy Frontend to Preview
+
+on:
+  push:
+    branches: [frontend/**/*]
+  pull_request:
+    types: [labeled]
+
+jobs:
+  log:
+    if: ${{ github.event.label.name == 'preview' && contains(github.event.pull_request.head.ref, 'frontend')}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log Condition Value
+        run: 'echo ${{ github.event.pull_request  }}'
+      - name: Log Condition Value_1
+        run: echo "${{ github.event.pull_request.labels  }}"
+      - name: Log Condition Value_2
+        run: echo "${{ github.event.pull_request.labels.name  }}"
+      - name: Run Command
+        run: echo "This is a PR for ${{ github.event.pull_request.head.ref  }}"
