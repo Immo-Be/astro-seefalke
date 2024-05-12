@@ -1,14 +1,11 @@
 ---
-import type {Post} from '../types/blog';
 import {fetchBlogPosts} from '../utils/get-api-url';
 
 import BlogPreviewArticles from './blog-preview-articles.astro';
 
-const {data: posts, status} = await fetchBlogPosts();
+const posts = await fetchBlogPosts();
+  console.log("🚀 ~ posts:", posts)
 
-if (status !== 200) {
-  throw new Error('Could not fetch posts');
-}
 ---
 
 <section class="recent-posts-container">
@@ -17,7 +14,7 @@ if (status !== 200) {
     <a href="/astro-seefalke/blog">Zum Blog</a>
   </header>
 
-  {(<BlogPreviewArticles posts={posts} maxPosts={3} />)}
+  <!-- {(<BlogPreviewArticles posts={posts} maxPosts={3} />)} -->
 </section>
 
 <style>

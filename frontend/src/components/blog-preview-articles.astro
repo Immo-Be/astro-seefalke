@@ -7,7 +7,7 @@ import FormattedDate from './formatted-date.astro';
 import GoogleMaps from './google-maps.astro';
 
 interface Props {
-  posts: Post[];
+  posts: Post[] | undefined;
   maxPosts?: number;
 }
 
@@ -16,7 +16,7 @@ const {posts, maxPosts} = Astro.props;
 
 <div class="blog-container">
   {
-    posts.map((post, index) => {
+    posts?.map((post, index) => {
       // We show a map only for the most recent post
       const isFirstElement = index === 0;
       if (maxPosts && index >= maxPosts) return null;

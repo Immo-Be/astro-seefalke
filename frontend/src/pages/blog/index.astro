@@ -4,7 +4,7 @@ import BlogPreviewArticles from '../../components/blog-preview-articles.astro';
 
 import {fetchBlogPosts} from '../../utils/get-api-url';
 
-const {data: posts} = await fetchBlogPosts();
+const posts = await fetchBlogPosts();
 ---
 
 <BaseLayout title="blog">
